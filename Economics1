@@ -29,7 +29,7 @@ import jieba.posseg # https://github.com/fxsjy/jieba
 import os, time
 
 board = "Economics/"
-for url in range(2): 
+for url in range(1): 
     URL = "https://www.ptt.cc/bbs/Economics/index.html" 
     print("URL", URL)
 
