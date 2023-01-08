@@ -1,0 +1,231 @@
+import os
+os.chdir('C:/Users/user/Desktop/農業/data')
+import openpyxl
+#import tkinter as tk
+#from tkinter import ttk
+#作物生長資訊EXCEL
+pd = openpyxl.load_workbook('produce_data.xlsx',data_only=True)
+#氣候資訊EXCEL
+wd = openpyxl.load_workbook('weather_data.xlsx',data_only=True)
+#作物價格EXCEL
+pr = openpyxl.load_workbook('price.xlsx',data_only=True)
+
+#各地氣候資訊
+wd1 = wd['1991to2020']
+wdcy = wd['嘉義']
+wdtn = wd['臺南']
+wdpt = wd['恆春']
+wdhl = wd['花蓮']
+#作物資訊
+pd_weather = pd['工作表1']
+pd_element = pd['工作表2']
+#作物價格
+pri = pr['統計表']
+#root = tk.Tk()
+#root.title('農業')
+#width = 600
+#height = 400
+#left = 0
+#top = 0
+#root.geometry(f'{width}x{height}+{left}+{top}')  # 定義視窗的尺寸和位置
+#d = {'wdcy':'嘉義','wdtn':'臺南','wdpt' : '恆春' ,'wdhl' : '花蓮'}
+#def show():
+#    def weather_check(field_data):
+#        for j in range(20,24):
+#            water_min_data = field_data['%s%d' %('N',j)]
+#            water_min = water_min_data
+#            water_min_data_year = field_data['%s%d' %('A',j)]
+#            water_min_year = water_min_data_year
+#            for i in range(2,7):
+#                water_need_data = pd_weather['%s%d' %('D',i)]
+#                water_need = water_need_data
+#                if int(water_need.value) < int(water_min.value):
+#                    water_need_data = pd_weather['%s%d' %('A',i)]
+#                    water_need = water_need_data
+#                    print(water_need.value,'在',water_min_data_year.value,'所需要的年雨量足夠')                
+#    field_data = {box.get()}
+#    weather_check(field_data)    # 顯示索引值與內容
+
+#a = tk.StringVar()                           # 定義變數
+#a.set('')
+
+#label = tk.Label(root, textvariable=a)       # 建立標籤，內容為變數
+#label.pack()
+
+#box = ttk.Combobox(root,
+#                    width=15,
+#                    values=['嘉義','臺南','恆春','花蓮'])
+#box.pack()
+
+#btn = tk.Button(root, text='顯示', command=show)   # 建立按鈕，點擊按鈕時，執行 show 函式
+#btn.pack()
+#root.mainloop()
+
+def weather_check(field_data):
+    for j in range(20,24):
+        water_min_data = field_data['%s%d' %('N',j)]
+        water_min = water_min_data
+        water_min_data_year = field_data['%s%d' %('A',j)]
+        water_min_year = water_min_data_year
+        for i in range(2,7):
+            water_need_data = pd_weather['%s%d' %('D',i)]
+            water_need = water_need_data
+            if int(water_need.value) < int(water_min.value):
+                water_need_data = pd_weather['%s%d' %('A',i)]
+                water_need = water_need_data
+                print(water_need.value,'在',water_min_data_year.value,'所需要的年雨量足夠')                   
+#field_data = wdcy 
+#weather_check(field_data)
+
+def temperature_check(field_data):
+    for j in range(8,12):
+        temperature_min_data = field_data['%s%d' %('N',j)]
+        temperature_min = temperature_min_data
+        temperature_min_data_year = field_data['%s%d' %('A',j)]
+        temperature_min_year = temperature_min_data_year
+        for i in range(2,7):
+            temperature_need_data_low = pd_weather['%s%d' %('B',i)]
+            temperature_need_low = temperature_need_data_low
+            temperature_need_data_high = pd_weather['%s%d' %('C',i)]
+            temperature_need_high = temperature_need_data_high
+            if int(temperature_need_low.value) < int(temperature_min.value) and int(temperature_need_high.value) > int(temperature_min.value):
+                temperature_need_data = pd_weather['%s%d' %('A',i)]
+                temperature_need = temperature_need_data
+                print(temperature_need.value,'在',temperature_min_data_year.value,'在適當的溫度範圍')
+#field_data = wdhl          #因為用的數據是平均溫度 所以沒有東西跑出來
+#temperature_check(field_data)
+
+def temperature_check_m(field_data):  
+    for j,k in zip(range(2,13) ,range(8,12)):
+        temperature_min_data_m = field_data['%s%d' %(j,k)]
+        temperature_min_data_year_m = field_data['%s%d' %(j,8)]
+        temperature_min_year_m = temperature_min_data_year_m
+        temperature_min_data_year = field_data['%s%d' %('A',k)]
+        temperature_min_year = temperature_min_data_year
+        temperature_min_m = temperature_min_data_m
+        for i in range(2,7):
+            temperature_need_data_low = pd_weather['%s%d' %('B',i)]
+            temperature_need_low = temperature_need_data_low
+            temperature_need_data_high = pd_weather['%s%d' %('C',i)]
+            temperature_need_high = temperature_need_data_high
+            if int(temperature_need_low.value) < int(temperature_min_m.value) and int(temperature_need_high.value) > int(temperature_min_m.value):
+                temperature_need_data_m = pd_weather['%s%d' %('A',i)]
+                temperature_need_m = temperature_need_data_m
+                print(temperature_need_m.value,'在',temperature_min_data_year_m.value,'在適當的溫度範圍')
+#field_data = wdcy 
+#temperature_check_m(field_data)
+
+def ph_check(field_data):
+    ph = float(input())
+    for i in range(2,11):
+        ph_need_data_low = pd_weather['%s%d' %('E',i)]
+        ph_need_low = ph_need_data_low
+        ph_need_data_high = pd_weather['%s%d' %('F',i)]
+        temperature_need_high = ph_need_data_high
+        if float(ph_need_low.value) < ph and float(ph_need_data_high.value) > ph:
+            ph_need_data = pd_weather['%s%d' %('A',i)]                
+            ph_need = ph_need_data
+            print(ph_need.value,'在適當的酸鹼度範圍')
+#field_data = wdcy 
+#ph_check(field_data)
+
+def light_check(field_data):
+    for j in range(26,30):
+        light_min_data = field_data['%s%d' %('N',j)]
+        light_min = light_min_data
+        light_min_data_year = field_data['%s%d' %('A',j)]
+        light_min_year = light_min_data_year
+        for i in range(2,7):
+            light_need_data = pd_weather['%s%d' %('I',i)]
+            light_need = light_need_data
+            if int(light_need.value) < int(light_min.value):
+                light_need_data = pd_weather['%s%d' %('A',i)]
+                light_need = light_need_data
+                print('種植',light_need.value,'在',light_min_data_year.value,'所需要的照光量足夠')                   
+#field_data = wdcy 
+#light_check(field_data)
+
+#元素檢查
+
+def fe_check(field_data):
+    fe = float(input())
+    for i in range(2,11):
+        fe_need_data = pd_element['%s%d' %('B',i)]
+        fe_need = fe_need_data
+        if float(fe_need.value) < fe :
+            fe_need_data = pd_element['%s%d' %('A',i)]                
+            fe_need = fe_need_data
+            print('種植',fe_need.value,'該土地的鐵含量足夠')
+#field_data = wdcy 
+#fe_check(field_data)
+
+def zn_check(field_data):
+    zn = float(input())
+    for i in range(2,11):
+        zn_need_data = pd_element['%s%d' %('C',i)]
+        zn_need = zn_need_data
+        if float(zn_need.value) < zn :
+            zn_need_data = pd_element['%s%d' %('A',i)]                
+            zn_need = zn_need_data
+            print('種植',zn_need.value,'該土地的鋅含量足夠')
+#field_data = wdcy 
+#zn_check(field_data)
+
+def ca_check(field_data):
+    ca = float(input())
+    for i in range(2,11):
+        ca_need_data = pd_element['%s%d' %('D',i)]
+        ca_need = ca_need_data
+        if float(ca_need.value) < ca :
+            ca_need_data = pd_element['%s%d' %('A',i)]                
+            ca_need = ca_need_data
+            print('種植',ca_need.value,'該土地的鈣含量足夠')
+#field_data = wdcy 
+#ca_check(field_data)
+
+def mg_check(field_data):
+    mg = float(input())
+    for i in range(2,11):
+        mg_need_data = pd_element['%s%d' %('E',i)]
+        mg_need = mg_need_data
+        if float(mg_need.value) < mg :
+            mg_need_data = pd_element['%s%d' %('A',i)]                
+            mg_need = mg_need_data
+            print('種植',mg_need.value,'該土地的鎂含量足夠')
+#field_data = wdcy 
+#mg_check(field_data)
+
+def k_check(field_data):
+    k = float(input())
+    for i in range(2,11):
+        k_need_data = pd_element['%s%d' %('F',i)]
+        k_need = k_need_data
+        if float(k_need.value) < k :
+            k_need_data = pd_element['%s%d' %('A',i)]                
+            k_need = k_need_data
+            print('種植',k_need.value,'該土地的鉀含量足夠')
+#field_data = wdcy 
+#k_check(field_data)
+
+def p_check(field_data):
+    p = float(input())
+    for i in range(2,11):
+        p_need_data = pd_element['%s%d' %('G',i)]
+        p_need = p_need_data
+        if float(p_need.value) < p :
+            p_need_data = pd_element['%s%d' %('A',i)]                
+            p_need = p_need_data
+            print('種植',p_need.value,'該土地的磷含量足夠')
+#field_data = wdcy 
+#p_check(field_data)
+
+#價格比較
+def money_compare(a):
+    dy = {100:'B',101:'C',102:'D',103:'E',104:'F',105:'G',106:'H',107:'I',108:'J',109:'K',110:'L'}
+    for i in range(3,14):
+        y = pri['%s%d' %(dy[a],i)] 
+        u = y
+        n = pri['%s%d' %('A',i)]
+        print(a,'年',n.value,'的價格',u.value,'元/公斤')
+a = 103
+#money_compare(a)
