@@ -109,7 +109,7 @@ def fe_check(field_data):
         if float(fe_need.value) < fe :
             fe_need_data = pd_element['%s%d' %('A',i)]                
             fe_need = fe_need_data
-            print(fe_need.value,'在適當的酸鹼度範圍')
+            print(fe_need.value,'土地的鐵含量足夠')
 #field_data = wdcy 
 #fe_check(field_data)
 
@@ -121,7 +121,7 @@ def zn_check(field_data):
         if float(zn_need.value) < zn :
             zn_need_data = pd_element['%s%d' %('A',i)]                
             zn_need = zn_need_data
-            print(zn_need.value,'在適當的酸鹼度範圍')
+            print(zn_need.value,'土地的鋅含量足夠')
 #field_data = wdcy 
 #zn_check(field_data)
 
@@ -133,7 +133,7 @@ def ca_check(field_data):
         if float(ca_need.value) < ca :
             ca_need_data = pd_element['%s%d' %('A',i)]                
             ca_need = ca_need_data
-            print(ca_need.value,'在適當的酸鹼度範圍')
+            print(ca_need.value,'土地的鈣含量足夠')
 #field_data = wdcy 
 #ca_check(field_data)
 
@@ -145,7 +145,7 @@ def mg_check(field_data):
         if float(mg_need.value) < mg :
             mg_need_data = pd_element['%s%d' %('A',i)]                
             mg_need = mg_need_data
-            print(mg_need.value,'在適當的酸鹼度範圍')
+            print(mg_need.value,'土地的鎂含量足夠')
 #field_data = wdcy 
 #mg_check(field_data)
 
@@ -157,7 +157,7 @@ def k_check(field_data):
         if float(k_need.value) < k :
             k_need_data = pd_element['%s%d' %('A',i)]                
             k_need = k_need_data
-            print(k_need.value,'在適當的酸鹼度範圍')
+            print(k_need.value,'土地的鉀含量足夠')
 #field_data = wdcy 
 #k_check(field_data)
 
@@ -169,7 +169,7 @@ def p_check(field_data):
         if float(p_need.value) < p :
             p_need_data = pd_element['%s%d' %('A',i)]                
             p_need = p_need_data
-            print(p_need.value,'在適當的酸鹼度範圍')
+            print(p_need.value,'土地的磷含量足夠')
 #field_data = wdcy 
 #p_check(field_data)
 
