@@ -124,3 +124,52 @@ def zn_check(field_data):
             print(zn_need.value,'在適當的酸鹼度範圍')
 #field_data = wdcy 
 #zn_check(field_data)
+
+def ca_check(field_data):
+    ca = float(input())
+    for i in range(2,11):
+        ca_need_data = pd_element['%s%d' %('D',i)]
+        ca_need = ca_need_data
+        if float(ca_need.value) < ca :
+            ca_need_data = pd_element['%s%d' %('A',i)]                
+            ca_need = ca_need_data
+            print(ca_need.value,'在適當的酸鹼度範圍')
+#field_data = wdcy 
+#ca_check(field_data)
+
+def mg_check(field_data):
+    mg = float(input())
+    for i in range(2,11):
+        mg_need_data = pd_element['%s%d' %('E',i)]
+        mg_need = mg_need_data
+        if float(mg_need.value) < mg :
+            mg_need_data = pd_element['%s%d' %('A',i)]                
+            mg_need = mg_need_data
+            print(mg_need.value,'在適當的酸鹼度範圍')
+#field_data = wdcy 
+#mg_check(field_data)
+
+def k_check(field_data):
+    k = float(input())
+    for i in range(2,11):
+        k_need_data = pd_element['%s%d' %('F',i)]
+        k_need = k_need_data
+        if float(k_need.value) < k :
+            k_need_data = pd_element['%s%d' %('A',i)]                
+            k_need = k_need_data
+            print(k_need.value,'在適當的酸鹼度範圍')
+#field_data = wdcy 
+#k_check(field_data)
+
+def p_check(field_data):
+    p = float(input())
+    for i in range(2,11):
+        p_need_data = pd_element['%s%d' %('G',i)]
+        p_need = p_need_data
+        if float(p_need.value) < p :
+            p_need_data = pd_element['%s%d' %('A',i)]                
+            p_need = p_need_data
+            print(p_need.value,'在適當的酸鹼度範圍')
+#field_data = wdcy 
+#p_check(field_data)
+
